@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staffing &amp; Labor Cost — ìkórè ilẹ̀</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap');
+
+  :root {
+    --off-white: #FFF9EB;
+    --black: #000000;
+    --deep-red: #641717;
+    --forest-green: #316D42;
+    --ink: #1A1410;
+    --paper: #FFF9EB;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.6;
+  }
+
+  a { color: inherit; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0; left: 0; right: 0;
+    z-index: 500;
+    background: var(--paper);
+    border-bottom: 1px solid rgba(26,20,16,0.1);
+    padding: 0 56px;
+  }
+  .nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .nav-wordmark {
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-back {
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(26,20,16,0.55);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--deep-red); }
+  .nav-back span { font-size: 14px; }
+
+  /* ── DOC HEADER ── */
+  .doc-header {
+    padding: 88px 56px 56px;
+    max-width: 880px;
+    margin: 0 auto;
+    border-bottom: 1px solid rgba(26,20,16,0.12);
+  }
+  .doc-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--deep-red);
+    margin-bottom: 22px;
+  }
+  .doc-title {
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+  .doc-byline {
+    font-size: 13px;
+    color: rgba(26,20,16,0.55);
+    letter-spacing: 0.02em;
+  }
+  .doc-byline strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  /* ── OVERVIEW ── */
+  .overview {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 64px 56px 56px;
+  }
+  .overview-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .overview-text p {
+    font-size: 15px;
+    line-height: 1.85;
+    color: rgba(26,20,16,0.72);
+    margin-bottom: 20px;
+  }
+  .overview-stats {
+    border-top: 1px solid rgba(26,20,16,0.15);
+    padding-top: 24px;
+  }
+  .ov-stat {
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(26,20,16,0.1);
+  }
+  .ov-stat-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(26,20,16,0.45);
+    margin-bottom: 6px;
+  }
+  .ov-stat-value {
+    font-size: 26px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  /* ── SECTION ── */
+  .section {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 56px 56px;
+    border-top: 1px solid rgba(26,20,16,0.1);
+  }
+  .section-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(26,20,16,0.4);
+    margin-bottom: 14px;
+  }
+  .section-title {
+    font-size: 28px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink);
+    margin-bottom: 36px;
+  }
+
+  /* ── ROLE TABLE ── */
+  .role-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .role-table thead th {
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(26,20,16,0.42);
+    padding: 0 0 12px;
+    border-bottom: 1px solid rgba(26,20,16,0.2);
+    font-weight: 400;
+  }
+  .role-table thead th:last-child,
+  .role-table tbody td:last-child {
+    text-align: right;
+  }
+  .role-table tbody td {
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(26,20,16,0.08);
+    font-size: 14px;
+    vertical-align: baseline;
+  }
+  .role-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-style: italic;
+    color: var(--ink);
+  }
+  .role-meta {
+    color: rgba(26,20,16,0.55);
+  }
+  .role-total {
+    font-weight: 500;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  /* ── SALARY LIST (management) ── */
+  .salary-list {
+    list-style: none;
+  }
+  .salary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(26,20,16,0.08);
+  }
+  .salary-role {
+    font-size: 17px;
+    font-style: italic;
+    color: var(--ink);
+  }
+  .salary-amount {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  /* ── SECTION TOTAL BAR ── */
+  .section-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(26,20,16,0.25);
+  }
+  .section-total-label {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(26,20,16,0.55);
+  }
+  .section-total-value {
+    font-size: 24px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--deep-red);
+  }
+
+  /* ── SUMMARY ── */
+  .summary {
+    background: var(--ink);
+    padding: 72px 56px;
+  }
+  .summary-inner {
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  .summary .section-eyebrow { color: rgba(255,249,235,0.45); }
+  .summary .section-title { color: var(--paper); }
+  .summary-rows {
+    margin-bottom: 32px;
+  }
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(255,249,235,0.12);
+    font-size: 15px;
+    color: rgba(255,249,235,0.75);
+  }
+  .summary-row strong {
+    font-size: 19px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--paper);
+  }
+  .summary-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255,249,235,0.3);
+  }
+  .summary-total-label {
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,249,235,0.6);
+  }
+  .summary-total-value {
+    font-size: 38px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--paper);
+  }
+
+  /* ── LABOR COST ANALYSIS ── */
+  .analysis {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 72px 56px 56px;
+  }
+  .analysis-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(26,20,16,0.1);
+    margin-bottom: 48px;
+  }
+  .analysis-cell {
+    background: var(--paper);
+    padding: 32px 28px;
+  }
+  .analysis-cell-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(26,20,16,0.45);
+    margin-bottom: 10px;
+  }
+  .analysis-cell-value {
+    font-size: 30px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink);
+  }
+  .analysis-cell-highlight .analysis-cell-value {
+    color: var(--deep-red);
+  }
+  .analysis-bar-track {
+    height: 28px;
+    background: rgba(26,20,16,0.08);
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .analysis-bar-fill {
+    height: 100%;
+    background: var(--deep-red);
+    width: 38.4%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 12px;
+  }
+  .analysis-bar-fill span {
+    font-size: 11px;
+    color: var(--paper);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  .analysis-text p {
+    font-size: 15px;
+    line-height: 1.9;
+    color: rgba(26,20,16,0.72);
+    margin-bottom: 22px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    padding: 48px 56px;
+    text-align: center;
+  }
+  .footer-note {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: rgba(255,249,235,0.35);
+  }
+  .footer-note a {
+    color: rgba(255,249,235,0.6);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,249,235,0.25);
+  }
+  .footer-note a:hover { color: var(--paper); }
+
+  @media (max-width: 720px) {
+    .overview-grid { grid-template-columns: 1fr; gap: 32px; }
+    .analysis-grid { grid-template-columns: 1fr; }
+    .doc-header, .overview, .section, .summary-inner, .analysis { padding-left: 28px; padding-right: 28px; }
+    nav { padding: 0 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-row">
+    <a href="index.html" class="nav-wordmark">ìkórè ilẹ̀</a>
+    <a href="index.html" class="nav-back"><span>&larr;</span> Back to Site</a>
+  </div>
+</nav>
+
+<header class="doc-header">
+  <p class="doc-eyebrow">Internal Planning Document</p>
+  <h1 class="doc-title">Staffing &amp; Labor Cost Schedule</h1>
+  <p class="doc-byline"><strong>Chef Dayan Jones</strong> &middot; Chef Grickis &middot; Menu &amp; Facilities Planning</p>
+</header>
+
+<section class="overview">
+  <div class="overview-grid">
+    <div class="overview-text">
+      <p>ìkórè ilẹ̀ is a 48-seat fine dining restaurant located in Buckhead, Atlanta, Georgia. The concept draws inspiration from African and Mediterranean culinary traditions while emphasizing farm-to-table sourcing, seasonality, sustainability, and elevated hospitality.</p>
+      <p>The restaurant operates Tuesday through Saturday from 5:30&nbsp;PM to 10:30&nbsp;PM and serves approximately 70 guests per evening, resulting in an estimated 21,840 annual covers.</p>
+      <p>The operation features a chef-driven menu, an on-site production garden, handmade pasta and pastry programs, and a service model focused on storytelling, guest education, and personalized hospitality.</p>
+    </div>
+    <div class="overview-stats">
+      <div class="ov-stat">
+        <div class="ov-stat-label">Average Guest Check</div>
+        <div class="ov-stat-value">$100</div>
+      </div>
+      <div class="ov-stat">
+        <div class="ov-stat-label">Annual Covers</div>
+        <div class="ov-stat-value">21,840</div>
+      </div>
+      <div class="ov-stat">
+        <div class="ov-stat-label">Projected Annual Revenue</div>
+        <div class="ov-stat-value">$2,184,000</div>
+      </div>
+      <div class="ov-stat">
+        <div class="ov-stat-label">Seating Capacity</div>
+        <div class="ov-stat-value">48 Seats</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MANAGEMENT -->
+<section class="section">
+  <p class="section-eyebrow">Salaried Positions</p>
+  <h2 class="section-title">Management</h2>
+  <ul class="salary-list">
+    <li class="salary-row">
+      <span class="salary-role">Executive Chef / Owner</span>
+      <span class="salary-amount">$95,000 / yr</span>
+    </li>
+    <li class="salary-row">
+      <span class="salary-role">General Manager</span>
+      <span class="salary-amount">$75,000 / yr</span>
+    </li>
+    <li class="salary-row">
+      <span class="salary-role">Sous Chef</span>
+      <span class="salary-amount">$65,000 / yr</span>
+    </li>
+  </ul>
+  <div class="section-total">
+    <span class="section-total-label">Total Salaried Payroll</span>
+    <span class="section-total-value">$235,000</span>
+  </div>
+</section>
+
+<!-- FRONT OF HOUSE -->
+<section class="section">
+  <p class="section-eyebrow">Hourly Positions</p>
+  <h2 class="section-title">Front of House</h2>
+  <table class="role-table">
+    <thead>
+      <tr>
+        <th>Position</th>
+        <th>Qty</th>
+        <th>Hrs / Wk</th>
+        <th>Rate</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="role-name">Lead Server</td>
+        <td class="role-meta">1</td>
+        <td class="role-meta">35</td>
+        <td class="role-total">$16.00</td>
+      </tr>
+      <tr>
+        <td class="role-name">Server</td>
+        <td class="role-meta">2</td>
+        <td class="role-meta">30</td>
+        <td class="role-total">$14.00</td>
+      </tr>
+      <tr>
+        <td class="role-name">Host</td>
+        <td class="role-meta">1</td>
+        <td class="role-meta">30</td>
+        <td class="role-total">$18.00</td>
+      </tr>
+      <tr>
+        <td class="role-name">Bartender</td>
+        <td class="role-meta">1</td>
+        <td class="role-meta">35</td>
+        <td class="role-total">$16.00</td>
+      </tr>
+      <tr>
+        <td class="role-name">Food Runner</td>
+        <td class="role-meta">2</td>
+        <td class="role-meta">25</td>
+        <td class="role-total">$16.00</td>
+      </tr>
+      <tr>
+        <td class="role-name">Dining Room Floater</td>
+        <td class="role-meta">1</td>
+        <td class="role-meta">25</td>
+        <td class="role-total">$18.00</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total">
+    <span class="section-total-label">Annual Front of House Payroll</span>
+    <span class="section-total-value">$203,000</span>
+  </div>
+</section>
+
+<!-- BACK OF HOUSE -->
+<section class="section">
+  <p class="section-eyebrow">Hourly Positions</p>
+  <h2 class="section-title">Back of House</h2>
+  <table class="role-table">
+    <thead>
+      <tr>
+        <th>Position</th>
+        <th>Qty</th>
+        <th>Hrs / Wk</th>
+        <th>Rate</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="role-name">Line Cook</td>
+        <td class="role-meta">2</td>
+        <td class="role-meta">40</td>
+        <td class="role-total">$24.00</td>
+      </tr>
+      <tr>
+        <td class="role-name">Garde Manger Cook</td>
+        <td class="role-meta">1</td>
+        <td class="role-meta">40</td>
+        <td class="role-total">$23.00</td>
+      </tr>
+      <tr>
+        <td class="role-name">Pastry Cook</td>
+        <td class="role-meta">1</td>
+        <td class="role-meta">30</td>
+        <td class="role-total">$23.00</td>
+      </tr>
+      <tr>
+        <td class="role-name">Prep Cook</td>
+        <td class="role-meta">1</td>
+        <td class="role-meta">35</td>
+        <td class="role-total">$21.00</td>
+      </tr>
+      <tr>
+        <td class="role-name">Dishwasher</td>
+        <td class="role-meta">2</td>
+        <td class="role-meta">30</td>
+        <td class="role-total">$19.00</td>
+      </tr>
+      <tr>
+        <td class="role-name">Utility Floater</td>
+        <td class="role-meta">1</td>
+        <td class="role-meta">30</td>
+        <td class="role-total">$22.00</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total">
+    <span class="section-total-label">Annual Back of House Payroll</span>
+    <span class="section-total-value">$315,000</span>
+  </div>
+</section>
+
+<!-- GARDEN TEAM -->
+<section class="section">
+  <p class="section-eyebrow">Hourly Positions</p>
+  <h2 class="section-title">Garden Team</h2>
+  <table class="role-table">
+    <thead>
+      <tr>
+        <th>Position</th>
+        <th>Qty</th>
+        <th>Hrs / Wk</th>
+        <th>Rate</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="role-name">Lead Gardener</td>
+        <td class="role-meta">1</td>
+        <td class="role-meta">35</td>
+        <td class="role-total">$24.00</td>
+      </tr>
+      <tr>
+        <td class="role-name">Garden Assistant</td>
+        <td class="role-meta">1</td>
+        <td class="role-meta">25</td>
+        <td class="role-total">$18.00</td>
+      </tr>
+      <tr>
+        <td class="role-name">Seasonal Garden Technician</td>
+        <td class="role-meta">1</td>
+        <td class="role-meta">20</td>
+        <td class="role-total">$17.00</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="section-total">
+    <span class="section-total-label">Annual Garden Payroll</span>
+    <span class="section-total-value">$85,000</span>
+  </div>
+</section>
+
+<!-- SUMMARY -->
+<section class="summary">
+  <div class="summary-inner">
+    <p class="section-eyebrow">Annual Payroll Summary</p>
+    <h2 class="section-title">By Department</h2>
+    <div class="summary-rows">
+      <div class="summary-row">
+        <span>Management Salaries</span>
+        <strong>$235,000</strong>
+      </div>
+      <div class="summary-row">
+        <span>Front of House Payroll</span>
+        <strong>$203,000</strong>
+      </div>
+      <div class="summary-row">
+        <span>Back of House Payroll</span>
+        <strong>$315,000</strong>
+      </div>
+      <div class="summary-row">
+        <span>Garden Team Payroll</span>
+        <strong>$85,000</strong>
+      </div>
+    </div>
+    <div class="summary-total">
+      <span class="summary-total-label">Total Annual Payroll</span>
+      <span class="summary-total-value">$838,000</span>
+    </div>
+  </div>
+</section>
+
+<!-- LABOR COST ANALYSIS -->
+<section class="analysis">
+  <p class="section-eyebrow">Labor Cost Analysis</p>
+  <h2 class="section-title">Revenue vs. Payroll</h2>
+
+  <div class="analysis-grid">
+    <div class="analysis-cell">
+      <div class="analysis-cell-label">Projected Annual Revenue</div>
+      <div class="analysis-cell-value">$2,184,000</div>
+    </div>
+    <div class="analysis-cell">
+      <div class="analysis-cell-label">Total Annual Payroll</div>
+      <div class="analysis-cell-value">$838,000</div>
+    </div>
+    <div class="analysis-cell analysis-cell-highlight">
+      <div class="analysis-cell-label">Labor Cost Percentage</div>
+      <div class="analysis-cell-value">38.4%</div>
+    </div>
+  </div>
+
+  <div class="analysis-bar-track">
+    <div class="analysis-bar-fill"><span>38.4%</span></div>
+  </div>
+
+  <div class="analysis-text">
+    <p>The labor structure reflects the operational needs of a contemporary fine dining restaurant while supporting the restaurant&rsquo;s commitment to scratch cooking, seasonal menu development, elevated guest service, and maintenance of an on-site garden program.</p>
+    <p>Specialized culinary positions ensure consistent execution of the menu, while cross-trained floater positions provide flexibility during peak periods and special events. The dedicated garden team reinforces the farm-to-table identity of the restaurant and contributes directly to ingredient quality and sustainability initiatives.</p>
+    <p>This staffing model is designed to support approximately 70 nightly covers while maintaining the hospitality standards expected within the Buckhead fine dining market.</p>
+  </div>
+</section>
+
+<footer>
+  <p class="footer-note">ìkórè ilẹ̀ &middot; Internal Document &middot; <a href="index.html">Return to main site</a></p>
+</footer>
+
+</body>
+</html>
