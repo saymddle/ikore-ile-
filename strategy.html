@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketing Strategy — ìkórè ilẹ̀</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap');
+
+  :root {
+    --off-white: #FFF9EB;
+    --black: #000000;
+    --deep-red: #641717;
+    --forest-green: #316D42;
+    --ink: #1A1410;
+    --paper: #FFF9EB;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.6;
+  }
+
+  a { color: inherit; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0; left: 0; right: 0;
+    z-index: 500;
+    background: var(--paper);
+    border-bottom: 1px solid rgba(26,20,16,0.1);
+    padding: 0 56px;
+  }
+  .nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .nav-wordmark {
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-back {
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(26,20,16,0.55);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--deep-red); }
+  .nav-back span { font-size: 14px; }
+
+  /* ── LAYOUT GRID: TOC sidebar + content ── */
+  .layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+
+  /* ── DOC HEADER ── */
+  .doc-header {
+    grid-column: 1 / -1;
+    padding: 88px 56px 56px;
+    max-width: 880px;
+    border-bottom: 1px solid rgba(26,20,16,0.12);
+  }
+  .doc-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--deep-red);
+    margin-bottom: 22px;
+  }
+  .doc-title {
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+  .doc-subtitle {
+    font-size: 15px;
+    font-style: italic;
+    color: rgba(26,20,16,0.5);
+    margin-bottom: 10px;
+  }
+  .doc-byline {
+    font-size: 13px;
+    color: rgba(26,20,16,0.55);
+  }
+
+  /* ── TOC SIDEBAR ── */
+  .toc {
+    padding: 56px 32px 56px 56px;
+    position: sticky;
+    top: 64px;
+    align-self: start;
+    height: fit-content;
+  }
+  .toc-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(26,20,16,0.4);
+    margin-bottom: 20px;
+  }
+  .toc-list {
+    list-style: none;
+  }
+  .toc-list li a {
+    display: block;
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(26,20,16,0.62);
+    text-decoration: none;
+    padding: 9px 0;
+    border-left: 2px solid transparent;
+    padding-left: 14px;
+    margin-left: -16px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .toc-list li a:hover {
+    color: var(--deep-red);
+    border-left-color: var(--deep-red);
+  }
+
+  /* ── MAIN CONTENT ── */
+  .content {
+    padding: 56px 56px 96px;
+    max-width: 880px;
+  }
+  .doc-section {
+    padding-top: 64px;
+    margin-top: 0;
+  }
+  .doc-section:first-child { padding-top: 0; }
+  .section-num {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--forest-green);
+    margin-bottom: 10px;
+  }
+  .section-h1 {
+    font-size: 30px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink);
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(26,20,16,0.12);
+  }
+  .section-h2 {
+    font-size: 21px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink);
+    margin: 40px 0 16px;
+  }
+  .body-text {
+    font-size: 15px;
+    line-height: 1.85;
+    color: rgba(26,20,16,0.72);
+    margin-bottom: 18px;
+  }
+  .label-tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--deep-red);
+    margin: 28px 0 12px;
+  }
+  ul.bullets {
+    list-style: none;
+    margin-bottom: 18px;
+  }
+  ul.bullets li {
+    position: relative;
+    padding-left: 22px;
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: rgba(26,20,16,0.7);
+    margin-bottom: 12px;
+  }
+  ul.bullets li::before {
+    content: '\2014';
+    position: absolute;
+    left: 0;
+    color: var(--forest-green);
+    font-size: 12px;
+  }
+  ul.bullets li strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .pillars-row {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    margin: 24px 0 32px;
+  }
+  .pillar-chip {
+    flex: 1 1 140px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 18px 20px;
+    text-align: center;
+  }
+  .pillar-chip span {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,249,235,0.5);
+    margin-bottom: 6px;
+  }
+  .pillar-chip strong {
+    font-size: 17px;
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  /* ── KPI TABLE ── */
+  .kpi-wrap {
+    margin: 24px 0 8px;
+    overflow-x: auto;
+  }
+  .kpi-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 520px;
+  }
+  .kpi-table caption {
+    text-align: left;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(26,20,16,0.5);
+    padding-bottom: 12px;
+  }
+  .kpi-table thead th {
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255,249,235,0.55);
+    background: var(--forest-green);
+    padding: 12px 16px;
+    font-weight: 400;
+  }
+  .kpi-table tbody td {
+    padding: 13px 16px;
+    border-bottom: 1px solid rgba(26,20,16,0.1);
+    font-size: 13.5px;
+    color: rgba(26,20,16,0.75);
+  }
+  .kpi-table tbody tr:nth-child(odd) { background: rgba(49,109,66,0.04); }
+  .kpi-metric { font-style: italic; color: var(--ink); font-size: 14.5px; }
+  .kpi-target { font-weight: 500; color: var(--deep-red); }
+
+  /* ── BUDGET TABLE ── */
+  .budget-wrap { margin: 24px 0 8px; overflow-x: auto; }
+  .budget-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 560px;
+  }
+  .budget-table thead th {
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--deep-red);
+    padding: 12px 16px;
+    font-weight: 400;
+  }
+  .budget-table tbody td {
+    padding: 13px 16px;
+    border-bottom: 1px solid rgba(26,20,16,0.1);
+    font-size: 13.5px;
+    color: rgba(26,20,16,0.75);
+    vertical-align: top;
+  }
+  .budget-table tbody tr.budget-total td {
+    border-top: 2px solid rgba(26,20,16,0.3);
+    border-bottom: none;
+    font-weight: 500;
+    color: var(--ink);
+    padding-top: 18px;
+  }
+  .budget-cat { font-style: italic; color: var(--ink); font-size: 14.5px; }
+  .budget-amt { font-weight: 500; color: var(--ink); white-space: nowrap; }
+  .budget-note { color: rgba(26,20,16,0.55); font-size: 13px; }
+  .budget-footnote {
+    font-size: 12px;
+    font-style: italic;
+    color: rgba(26,20,16,0.5);
+    margin-top: 16px;
+    line-height: 1.7;
+  }
+
+  .trigger-box {
+    background: rgba(100,23,23,0.06);
+    border-left: 3px solid var(--deep-red);
+    padding: 18px 24px;
+    margin: 24px 0 32px;
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: rgba(26,20,16,0.72);
+  }
+  .trigger-box strong { color: var(--deep-red); font-style: italic; }
+
+  .closing-statement {
+    margin-top: 48px;
+    padding: 40px 0 0;
+    border-top: 1px solid rgba(26,20,16,0.15);
+  }
+  .closing-statement p {
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    padding: 48px 56px;
+    text-align: center;
+  }
+  .footer-note {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: rgba(255,249,235,0.35);
+  }
+  .footer-note a {
+    color: rgba(255,249,235,0.6);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,249,235,0.25);
+  }
+  .footer-note a:hover { color: var(--paper); }
+
+  @media (max-width: 920px) {
+    .layout { grid-template-columns: 1fr; }
+    .toc { position: relative; top: 0; padding: 32px 28px 0; }
+    .content { padding: 32px 28px 64px; }
+    .doc-header { padding: 56px 28px 40px; }
+    nav { padding: 0 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-row">
+    <a href="index.html" class="nav-wordmark">ìkórè ilẹ̀</a>
+    <a href="index.html" class="nav-back"><span>&larr;</span> Back to Site</a>
+  </div>
+</nav>
+
+<header class="doc-header">
+  <p class="doc-eyebrow">Internal Planning Document &middot; Section 2</p>
+  <h1 class="doc-title">Marketing Strategy</h1>
+  <p class="doc-subtitle">West African&ndash;Mediterranean Farm-to-Table Fine Dining &middot; Buckhead, Atlanta, Georgia</p>
+  <p class="doc-byline">Prepared for Investor and Academic Review</p>
+</header>
+
+<div class="layout">
+
+  <aside class="toc">
+    <p class="toc-label">Contents</p>
+    <ul class="toc-list">
+      <li><a href="#s21">2.1 &nbsp;Strategic Overview</a></li>
+      <li><a href="#s22">2.2 &nbsp;Pre-Opening Strategy</a></li>
+      <li><a href="#s23">2.3 &nbsp;Opening Week</a></li>
+      <li><a href="#s24">2.4 &nbsp;First 30 Days</a></li>
+      <li><a href="#s25">2.5 &nbsp;Slump Recovery</a></li>
+      <li><a href="#s26">2.6 &nbsp;Marketing Budget</a></li>
+      <li><a href="#s27">2.7 &nbsp;Competitive Differentiation</a></li>
+    </ul>
+  </aside>
+
+  <main class="content">
+
+    <!-- 2.1 -->
+    <section class="doc-section" id="s21">
+      <p class="section-num">2.1</p>
+      <h2 class="section-h1">Strategic Marketing Overview</h2>
+      <p class="body-text">ìkórè ilẹ̀ &mdash; Yoruba for &ldquo;harvest of the earth&rdquo; &mdash; enters the Atlanta fine dining market as a concept without direct competition. It is the intersection of West African culinary heritage, Mediterranean agricultural tradition, and a lived commitment to farm-to-table sourcing. The restaurant&rsquo;s three foundational pillars &mdash; Heritage, Agriculture, and Community &mdash; are not marketing themes. They are the operational and cultural architecture of the business itself.</p>
+      <p class="body-text">This marketing strategy is designed around one core premise: every guest interaction, press mention, and digital touchpoint should deepen the public&rsquo;s understanding of ìkórè ilẹ̀ as a place of origin, not just a place to eat. For a concept this distinctive, the marketing plan is not primarily a promotional tool &mdash; it is a storytelling infrastructure.</p>
+
+      <div class="pillars-row">
+        <div class="pillar-chip"><span>Pillar</span><strong>Heritage</strong></div>
+        <div class="pillar-chip"><span>Pillar</span><strong>Agriculture</strong></div>
+        <div class="pillar-chip"><span>Pillar</span><strong>Community</strong></div>
+      </div>
+
+      <p class="body-text">The strategy is organized across four critical windows:</p>
+      <ul class="bullets">
+        <li><strong>Pre-Opening</strong> &mdash; 90 days before doors open</li>
+        <li><strong>Opening Week</strong> &mdash; soft launch through grand opening</li>
+        <li><strong>First 30 Days</strong> &mdash; conversion, retention, and community momentum</li>
+        <li><strong>Sales Slump Recovery</strong> &mdash; a structured re-engagement protocol</li>
+      </ul>
+    </section>
+
+    <!-- 2.2 -->
+    <section class="doc-section" id="s22">
+      <p class="section-num">2.2</p>
+      <h2 class="section-h1">Pre-Opening Strategy <span style="font-size:16px; opacity:0.55;">(90 Days Before Opening)</span></h2>
+      <p class="body-text">The pre-opening period is ìkórè ilẹ̀&rsquo;s most valuable unrepeatable asset: the window before anyone has eaten here, when mystery and anticipation can be deliberately cultivated. The goal is not to announce a restaurant &mdash; it is to introduce a world.</p>
+
+      <h3 class="section-h2">2.2.1 &nbsp;Brand Infrastructure Launch</h3>
+      <p class="label-tag">Objective</p>
+      <p class="body-text">Establish a consistent, polished public presence across all digital and print channels before the first reservation is taken.</p>
+      <p class="label-tag">Actions</p>
+      <ul class="bullets">
+        <li>Launch the ìkórè ilẹ̀ website featuring the brand&rsquo;s four-color system (Off-White, Black, Deep Red, Forest Green), the SVG botanical crest, and the full seasonal menu narrative.</li>
+        <li>Activate branded social media accounts (Instagram, TikTok, LinkedIn) with a single high-design launch post anchored in the Yoruba name and its translation.</li>
+        <li>Register the restaurant with Google Business, OpenTable, Resy, and Yelp. Precision in listing accuracy at this stage prevents long-term SEO and reputation damage.</li>
+        <li>Establish email list capture on the website with a pre-opening interest form &mdash; no discount offer, no gimmick. The ask is: &ldquo;Be among the first to experience the harvest.&rdquo;</li>
+      </ul>
+
+      <h3 class="section-h2">2.2.2 &nbsp;Narrative Content Strategy</h3>
+      <p class="label-tag">Objective</p>
+      <p class="body-text">Build emotional investment and editorial credibility through consistent, high-quality storytelling content in the 90 days before opening.</p>
+      <p class="label-tag">Content Pillars</p>
+      <ul class="bullets">
+        <li><strong>The Origin Story</strong> &mdash; the founding narrative connecting West African food traditions to the Atlanta dining landscape, told through the Yoruba concept of ìkórè (harvest) and ilẹ̀ (earth, place, home).</li>
+        <li><strong>The Garden Program</strong> &mdash; weekly photo and video documentation of seed planting, soil preparation, harvest cycles, and farmer partnerships.</li>
+        <li><strong>Kitchen Development</strong> &mdash; behind-the-scenes footage of menu R&amp;D, ingredient sourcing trips, and chef tasting sessions.</li>
+        <li><strong>Construction &amp; Space</strong> &mdash; architecture and interior progress updates. In Buckhead, the space itself is a signal of ambition.</li>
+      </ul>
+      <p class="label-tag">Posting Cadence</p>
+      <ul class="bullets">
+        <li><strong>Instagram</strong> &mdash; 4&ndash;5 posts per week (2 Reels, 2&ndash;3 static editorial posts)</li>
+        <li><strong>TikTok</strong> &mdash; 3 posts per week (raw, process-driven content performs best)</li>
+        <li><strong>Email Newsletter</strong> &mdash; bi-weekly during pre-opening, weekly after opening</li>
+      </ul>
+
+      <h3 class="section-h2">2.2.3 &nbsp;Community Relationship Infrastructure</h3>
+      <p class="label-tag">Objective</p>
+      <p class="body-text">Build authentic partnerships with the Atlanta food, agriculture, farming, and cultural community before opening &mdash; not as a promotional tactic, but as an expression of the restaurant&rsquo;s actual values.</p>
+      <p class="label-tag">Priority Partners</p>
+      <ul class="bullets">
+        <li>Local farms supplying seasonal produce to the menu</li>
+        <li>Black-owned food and beverage businesses in Atlanta</li>
+        <li>Atlanta-based African cultural organizations &mdash; Yoruba cultural societies, West African diaspora groups, pan-African arts networks</li>
+        <li>Culinary schools (Le Cordon Bleu Atlanta, Kennesaw State, Georgia State)</li>
+        <li>Buckhead hotels and corporate hospitality managers</li>
+        <li>Atlanta food influencers (10K&ndash;500K range preferred over mega-influencers)</li>
+      </ul>
+
+      <h3 class="section-h2">2.2.4 &nbsp;Press Outreach Campaign</h3>
+      <p class="label-tag">Objective</p>
+      <p class="body-text">Secure pre-opening editorial coverage that positions ìkórè ilẹ̀ as a culturally significant arrival in the Atlanta restaurant market, not merely a new opening.</p>
+      <p class="label-tag">Target Publications &amp; Contacts</p>
+      <ul class="bullets">
+        <li><strong>Eater Atlanta</strong> &mdash; national reach; pitch: &ldquo;First West African fine dining concept in Buckhead&rdquo;</li>
+        <li><strong>Atlanta Magazine</strong> &mdash; affluent, design-forward readership; pitch: brand story and interior aesthetic</li>
+        <li><strong>Atlanta Journal-Constitution Food Section</strong> &mdash; broad Atlanta readership; pitch: founder story, farm program</li>
+        <li><strong>Rough Draft Atlanta</strong> &mdash; community-rooted business coverage</li>
+        <li><strong>Edible Atlanta</strong> &mdash; natural fit for the farm-to-table program</li>
+        <li><strong>WSB-TV / 11Alive</strong> &mdash; local television morning segments for opening week</li>
+        <li><strong>Rolling Out, Sheen Magazine (Atlanta edition)</strong> &mdash; culturally specific audience, editorial alignment</li>
+      </ul>
+      <p class="label-tag">Pitch Strategy</p>
+      <p class="body-text">Press outreach begins at Day 90 with a media kit delivered by email: founding story, brand photography, farm program fact sheet, one-page chef biography, and a preview of the opening menu. A second wave goes out at Day 30 offering exclusive soft opening access to two to three writers.</p>
+
+      <div class="kpi-wrap">
+        <table class="kpi-table">
+          <caption>Pre-Opening KPIs</caption>
+          <thead><tr><th>KPI Metric</th><th>Target</th><th>Timeline</th></tr></thead>
+          <tbody>
+            <tr><td class="kpi-metric">Instagram followers</td><td class="kpi-target">2,500+</td><td>Day 90 &rarr; Day 0</td></tr>
+            <tr><td class="kpi-metric">Email list size</td><td class="kpi-target">500+ subscribers</td><td>Day 60 &rarr; Day 0</td></tr>
+            <tr><td class="kpi-metric">Press placements secured</td><td class="kpi-target">3&ndash;5 confirmed</td><td>By Day 30</td></tr>
+            <tr><td class="kpi-metric">Farm/supplier partnerships</td><td class="kpi-target">4+ active</td><td>By Day 60</td></tr>
+            <tr><td class="kpi-metric">Community partners engaged</td><td class="kpi-target">8&ndash;10 organizations</td><td>By Day 45</td></tr>
+            <tr><td class="kpi-metric">B2B hospitality contacts</td><td class="kpi-target">15+ Buckhead hotels/corps</td><td>By Day 30</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 2.3 -->
+    <section class="doc-section" id="s23">
+      <p class="section-num">2.3</p>
+      <h2 class="section-h1">Opening Week Strategy</h2>
+      <p class="body-text">Opening week at ìkórè ilẹ̀ is staged in two distinct phases: an invitation-only soft opening designed to generate authentic early reviews, and a public grand opening event that functions as a cultural declaration.</p>
+
+      <h3 class="section-h2">2.3.1 &nbsp;Invite-Only Soft Opening <span style="font-size:14px; opacity:0.55;">(Days &ndash;5 through &ndash;1)</span></h3>
+      <p class="label-tag">Objective</p>
+      <p class="body-text">Generate authentic third-party reviews, social proof, and word-of-mouth before public opening. Stress-test the full dining experience &mdash; service cadence, menu execution, kitchen output &mdash; under real conditions.</p>
+      <p class="label-tag">Guest List Composition</p>
+      <ul class="bullets">
+        <li>Atlanta food media writers and editors (2&ndash;3 selected from press outreach list)</li>
+        <li>Local chefs and culinary peers &mdash; industry credibility and referral network</li>
+        <li>Farm and supplier partners who contributed to the menu</li>
+        <li>African cultural organization leaders &mdash; community validation</li>
+        <li>Buckhead hotel concierge managers and event planners</li>
+        <li>Select food influencers (nano to micro tier: 5K&ndash;100K) with engaged, Atlanta-specific audiences</li>
+      </ul>
+      <p class="label-tag">Format</p>
+      <p class="body-text">Three evenings of service, maximum 24 covers per night. Full tasting menu format with garden program explanation integrated into service. Each table receives a printed card with the Yoruba name etymology and the farm sourcing map for the evening&rsquo;s menu.</p>
+      <p class="label-tag">Post-Soft-Opening Actions</p>
+      <ul class="bullets">
+        <li>Send personalized thank-you notes to all guests within 24 hours</li>
+        <li>Follow up with media guests to confirm review timelines</li>
+        <li>Conduct internal post-mortem: identify service, pacing, and menu issues before public opening</li>
+      </ul>
+
+      <h3 class="section-h2">2.3.2 &nbsp;Grand Opening Event &mdash; &ldquo;Harvest of the Earth&rdquo;</h3>
+      <p class="label-tag">Objective</p>
+      <p class="body-text">Create a single, culturally resonant public debut event that generates media coverage, social content, and word-of-mouth simultaneously &mdash; while communicating the three pillars of Heritage, Agriculture, and Education in an experiential format.</p>
+      <p class="label-tag">Event Design</p>
+      <ul class="bullets">
+        <li><strong>Theme</strong> &mdash; &ldquo;Harvest of the Earth,&rdquo; drawn directly from the Yoruba name ìkórè ilẹ̀</li>
+        <li><strong>Garden Tour Experience</strong> &mdash; guided walk through the restaurant&rsquo;s garden program, led by the head farmer and sous chef</li>
+        <li><strong>Tasting Menu Preview</strong> &mdash; ticketed multi-course experience with wine and non-alcoholic botanical pairings inspired by West African herbal traditions</li>
+        <li><strong>Cultural Storytelling Component</strong> &mdash; an artist or griot-style spoken word element contextualizing West African culinary heritage</li>
+        <li><strong>Live Music</strong> &mdash; an Atlanta-based artist connecting African diaspora musical traditions</li>
+        <li><strong>Local Artist Showcase</strong> &mdash; two to three Atlanta artists with work displayed in the dining room for the opening month</li>
+      </ul>
+      <p class="label-tag">Media Coverage Strategy</p>
+      <p class="body-text">One photographer and one videographer contracted for the full event. Deliverables: 50+ edited photographs, a 2-minute highlight reel, and 15-second Reel edits for Instagram/TikTok &mdash; all distributed within 72 hours of the event.</p>
+
+      <h3 class="section-h2">2.3.3 &nbsp;User-Generated Content Program</h3>
+      <p class="label-tag">Hashtag</p>
+      <p class="body-text" style="font-size:20px; font-style:italic; color:var(--deep-red);">#HarvestAtIkoreIle</p>
+      <p class="label-tag">Activation Mechanics</p>
+      <ul class="bullets">
+        <li>Each table card includes the hashtag and a QR code linking to the restaurant&rsquo;s Instagram</li>
+        <li>Staff trained to invite (never pressure) guests to share their experience</li>
+        <li>Opening week UGC reposted daily to brand Instagram Stories with guest credit</li>
+        <li>Best UGC from opening week compiled into a &ldquo;Harvest Night&rdquo; highlight reel posted at the end of the week</li>
+      </ul>
+
+      <div class="kpi-wrap">
+        <table class="kpi-table">
+          <caption>Opening Week KPIs</caption>
+          <thead><tr><th>KPI Metric</th><th>Target</th><th>Timeline</th></tr></thead>
+          <tbody>
+            <tr><td class="kpi-metric">Soft opening covers served</td><td class="kpi-target">72 total (24 &times; 3 nights)</td><td>Days &ndash;5 to &ndash;1</td></tr>
+            <tr><td class="kpi-metric">Press reviews published</td><td class="kpi-target">2+ within 30 days of opening</td><td>Week of opening</td></tr>
+            <tr><td class="kpi-metric">Instagram followers gained</td><td class="kpi-target">+1,000 during event week</td><td>Opening week</td></tr>
+            <tr><td class="kpi-metric">#HarvestAtIkoreIle posts</td><td class="kpi-target">50+ guest posts</td><td>Opening week</td></tr>
+            <tr><td class="kpi-metric">Reservation waitlist</td><td class="kpi-target">2 weeks fully booked</td><td>By end of opening week</td></tr>
+            <tr><td class="kpi-metric">Email list growth</td><td class="kpi-target">+300 new subscribers</td><td>Opening week</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 2.4 -->
+    <section class="doc-section" id="s24">
+      <p class="section-num">2.4</p>
+      <h2 class="section-h1">First 30 Days After Opening</h2>
+      <p class="body-text">The opening night glow fades quickly. The first 30 days are where the marketing strategy must transition from event-driven momentum to systems-driven retention. The objective shifts from attracting first-time visitors to converting them into advocates and returning guests.</p>
+
+      <h3 class="section-h2">2.4.1 &nbsp;Guest Retention System</h3>
+      <p class="label-tag">Objective</p>
+      <p class="body-text">Build a repeatable post-visit experience that makes every guest feel the relationship with ìkórè ilẹ̀ extends beyond the meal.</p>
+      <p class="label-tag">Reservation Follow-Up Protocol</p>
+      <ul class="bullets">
+        <li>Automated email sent 48 hours after every reservation: personalized message referencing the dishes served that evening, a note about the farm sourcing story, and a link to the seasonal menu preview for the following month</li>
+        <li>Handwritten note cards sent to guests dining on special occasions (birthdays, anniversaries)</li>
+        <li>Returning guest recognition: front-of-house team briefed before service on any returning guest; acknowledged at the host stand</li>
+      </ul>
+      <p class="label-tag">Loyalty Tier Structure</p>
+      <ul class="bullets">
+        <li><strong>&ldquo;Root&rdquo;</strong> &mdash; first visit. Added to email list. Access to seasonal menu announcements.</li>
+        <li><strong>&ldquo;Harvest&rdquo;</strong> &mdash; 3+ visits within 12 months. Priority reservation access during peak periods. Invitation to quarterly Harvest Table dinners.</li>
+        <li><strong>&ldquo;Steward&rdquo;</strong> &mdash; 6+ visits or corporate/group spend threshold. Chef&rsquo;s table access. Advance access to limited seasonal menus. Personal note from the founder on anniversary visit.</li>
+      </ul>
+
+      <h3 class="section-h2">2.4.2 &nbsp;Community and Cultural Programming</h3>
+      <p class="label-tag">Objective</p>
+      <p class="body-text">Transform ìkórè ilẹ̀ from a restaurant into a gathering place &mdash; consistent with the Education &middot; Agriculture &middot; Culture ecosystem model at the heart of the brand.</p>
+      <p class="label-tag">Monthly Programming Calendar (First 30 Days)</p>
+      <ul class="bullets">
+        <li><strong>Garden Workshop</strong> &mdash; hands-on seed-to-plate workshop for 8&ndash;12 guests, led by the head farmer. Price-per-head. Includes a curated family-style meal made from the day&rsquo;s harvest.</li>
+        <li><strong>Heritage Dinner Series</strong> &mdash; a recurring themed dinner spotlighting a specific West African culinary tradition each month (e.g., Yoruba fermentation techniques, Ghanaian spice routes, Senegalese grain culture). Narrated by the chef. 18-cover maximum.</li>
+        <li><strong>Ingredient Tasting</strong> &mdash; bi-monthly free event (donations to a local food access organization) featuring three to five heritage or heirloom ingredients used in the current menu.</li>
+        <li><strong>Chef Collaboration Dinner</strong> &mdash; one invitation-only dinner within the first 30 days featuring an Atlanta-based chef from the Black or African culinary community. Ticketed. Co-promoted to both audiences.</li>
+      </ul>
+
+      <h3 class="section-h2">2.4.3 &nbsp;Digital Momentum Maintenance</h3>
+      <p class="label-tag">Objective</p>
+      <p class="body-text">Sustain the media and social attention generated during opening week through the first month of service.</p>
+      <p class="label-tag">Content Strategy</p>
+      <ul class="bullets">
+        <li>Post opening photography and event recap within 48 hours across all channels</li>
+        <li>Weekly &ldquo;From the Garden&rdquo; content: what was harvested this week, what&rsquo;s on the menu, where it came from</li>
+        <li>Guest testimonial content: with permission, repost and amplify written and video reviews</li>
+        <li>Pitch post-opening follow-up stories to Eater Atlanta and Atlanta Magazine emphasizing real guest experiences</li>
+        <li>Submit for consideration: Eater&rsquo;s &ldquo;Essential Atlanta&rdquo; lists; Atlanta Magazine&rsquo;s Best New Restaurants; local dining award cycles</li>
+      </ul>
+
+      <div class="kpi-wrap">
+        <table class="kpi-table">
+          <caption>First 30 Days KPIs</caption>
+          <thead><tr><th>KPI Metric</th><th>Target</th><th>Timeline</th></tr></thead>
+          <tbody>
+            <tr><td class="kpi-metric">Guest retention rate</td><td class="kpi-target">25%+ return visit in 30 days</td><td>Days 1&ndash;30</td></tr>
+            <tr><td class="kpi-metric">Email open rate</td><td class="kpi-target">40%+</td><td>Days 1&ndash;30</td></tr>
+            <tr><td class="kpi-metric">Average check size</td><td class="kpi-target">At or above pro forma target</td><td>Days 1&ndash;30</td></tr>
+            <tr><td class="kpi-metric">Community event attendance</td><td class="kpi-target">90%+ capacity per event</td><td>Days 1&ndash;30</td></tr>
+            <tr><td class="kpi-metric">Press reviews published</td><td class="kpi-target">4+ total (incl. soft opening)</td><td>Days 1&ndash;30</td></tr>
+            <tr><td class="kpi-metric">Heritage Dinner sold out</td><td class="kpi-target">Yes &mdash; both seatings</td><td>Within 30 days</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 2.5 -->
+    <section class="doc-section" id="s25">
+      <p class="section-num">2.5</p>
+      <h2 class="section-h1">Sales Slump Recovery Protocol</h2>
+      <p class="body-text">Even well-executed restaurant concepts experience periods of reduced traffic &mdash; driven by seasonality, economic headwinds, competitive new openings, or simple erosion of initial buzz. ìkórè ilẹ̀ is positioned to navigate slumps strategically because its brand is not dependent on novelty. Its competitive advantage is rooted in heritage and community, which are durable.</p>
+
+      <div class="trigger-box">
+        <strong>Activation Trigger</strong> &mdash; This protocol is activated when any of the following conditions are observed for two consecutive weeks: cover count down 20%+ from baseline; average check size declining; reservation lead time below 3 days; repeat guest rate below 15%.
+      </div>
+
+      <h3 class="section-h2">2.5.1 &nbsp;Phase 1 &mdash; Diagnose Before Acting</h3>
+      <p class="label-tag">Objective</p>
+      <p class="body-text">Identify the root cause of the slump before committing to any recovery tactic. The wrong intervention wastes resources and can damage brand positioning.</p>
+      <p class="label-tag">Analysis Checklist</p>
+      <ul class="bullets">
+        <li>Cover count trend: daily and weekly for the past 30 days</li>
+        <li>Average check comparison: current vs. opening 30-day baseline</li>
+        <li>Menu mix analysis: are low-margin items over-indexing? Are premium items being ordered less?</li>
+        <li>Reservation channel breakdown: Resy, OpenTable, walk-in, phone &mdash; where is the drop occurring?</li>
+        <li>Guest feedback review: OpenTable/Google reviews from the past 30 days for service or quality patterns</li>
+        <li>Competitive context: have any notable new restaurants opened in Buckhead in the past 60 days?</li>
+        <li>Calendar context: is this a predictable seasonal pattern (e.g., post-holiday January)?</li>
+      </ul>
+
+      <h3 class="section-h2">2.5.2 &nbsp;Phase 2 &mdash; Community Re-Activation</h3>
+      <p class="label-tag">Objective</p>
+      <p class="body-text">The first response to a slump is not a discount &mdash; it is a cultural event. ìkórè ilẹ̀ does not compete on price. It competes on experience and story.</p>
+      <p class="label-tag">Harvest Week Activation <span style="opacity:0.6; font-size:13px; font-style:italic;">&mdash; a 5-day culinary and cultural event series</span></p>
+      <ul class="bullets">
+        <li><strong>&ldquo;Root to Table&rdquo; dinner</strong> &mdash; special tasting menu built entirely around the current season&rsquo;s garden harvest, with chef narration at each course. Priced at a premium.</li>
+        <li><strong>Community Table Night</strong> &mdash; one evening where 8 seats are reserved at no cost for community leaders, teachers, farmers, or food access advocates, funded by revenue from the week&rsquo;s premium dinners.</li>
+        <li><strong>Garden Immersion Experience</strong> &mdash; ticketed Saturday morning garden tour and cooking experience. Families welcome.</li>
+        <li><strong>Pop-Up Ingredient Market</strong> &mdash; a brief weekend market in the restaurant&rsquo;s outdoor space featuring farm partners, honey producers, and specialty ingredient suppliers. Open to the public.</li>
+      </ul>
+
+      <h3 class="section-h2">2.5.3 &nbsp;Phase 3 &mdash; Strategic Partnership Activation</h3>
+      <p class="label-tag">Objective</p>
+      <p class="body-text">Expand reach beyond the existing customer base by activating pre-built B2B and institutional relationships.</p>
+      <p class="label-tag">Partnership Channels</p>
+      <ul class="bullets">
+        <li><strong>Buckhead hotel concierges</strong> &mdash; personalized outreach with a &ldquo;Guest Experience&rdquo; package, including a QR code booking link</li>
+        <li><strong>Corporate dining and executive lunch program</strong> &mdash; a curated 3-course business lunch format for law firms, financial institutions, and corporate headquarters concentrated in Buckhead</li>
+        <li><strong>Event planner network</strong> &mdash; outreach to Atlanta&rsquo;s top-tier event planners with a private dining capabilities deck</li>
+        <li><strong>Atlanta Tourism and Convention Bureau</strong> &mdash; submission to official Atlanta visitor guides and tourism packages</li>
+        <li><strong>IDANA platform cross-promotion</strong> &mdash; leveraging ìkórè ilẹ̀ as a real-world case study within the IDANA culinary R&amp;D platform ecosystem</li>
+      </ul>
+
+      <h3 class="section-h2">2.5.4 &nbsp;Phase 4 &mdash; Menu Innovation Cycle</h3>
+      <p class="label-tag">Objective</p>
+      <p class="body-text">Create urgency, excitement, and editorial interest through menu-driven storytelling without repositioning the brand or discounting existing offerings.</p>
+      <p class="label-tag">Tactics</p>
+      <ul class="bullets">
+        <li>Introduce 2&ndash;3 limited seasonal dishes available for a defined window (4&ndash;6 weeks), marketed as &ldquo;while the harvest allows&rdquo;</li>
+        <li>Guest chef collaboration dinner with a chef from the West African or Mediterranean diaspora for a one-night collaborative menu</li>
+        <li>&ldquo;Heritage Ingredient Spotlight&rdquo; menu centered on a single heirloom or culturally significant ingredient &mdash; e.g., fonio, moringa, suya spice composition, preserved lemon</li>
+        <li>Seasonal cocktail and non-alcoholic botanical menu refresh built from West African herbal and spice traditions</li>
+      </ul>
+
+      <div class="kpi-wrap">
+        <table class="kpi-table">
+          <caption>Slump Recovery KPIs</caption>
+          <thead><tr><th>KPI Metric</th><th>Target</th><th>Timeline</th></tr></thead>
+          <tbody>
+            <tr><td class="kpi-metric">Cover count recovery</td><td class="kpi-target">Return to baseline within 3 weeks</td><td>Post-activation</td></tr>
+            <tr><td class="kpi-metric">Harvest Week revenue</td><td class="kpi-target">20%+ above prior week</td><td>Event week</td></tr>
+            <tr><td class="kpi-metric">New B2B accounts opened</td><td class="kpi-target">3+ during recovery period</td><td>30-day window</td></tr>
+            <tr><td class="kpi-metric">Guest chef event: sold out</td><td class="kpi-target">Yes &mdash; both seatings</td><td>Event night</td></tr>
+            <tr><td class="kpi-metric">Google review count growth</td><td class="kpi-target">+10 new reviews</td><td>30-day window</td></tr>
+            <tr><td class="kpi-metric">Limited dish sell-through</td><td class="kpi-target">80%+ within designated window</td><td>Weekly</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 2.6 -->
+    <section class="doc-section" id="s26">
+      <p class="section-num">2.6</p>
+      <h2 class="section-h1">Estimated Marketing Budget</h2>
+      <p class="body-text">The following represents a projected marketing budget for the pre-opening, opening week, and first 30-day periods. Figures are estimates based on comparable Buckhead fine dining launch costs and should be adjusted during final business planning.</p>
+
+      <div class="budget-wrap">
+        <table class="budget-table">
+          <thead><tr><th>Category</th><th>Estimated Budget</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td class="budget-cat">Website &amp; Digital Assets</td><td class="budget-amt">$2,500 &ndash; $5,000</td><td class="budget-note">One-time build cost; branded to four-color system</td></tr>
+            <tr><td class="budget-cat">Pre-Opening Content Production</td><td class="budget-amt">$3,000 &ndash; $6,000</td><td class="budget-note">Photography, video, social creative (90 days)</td></tr>
+            <tr><td class="budget-cat">Press &amp; Media Kit</td><td class="budget-amt">$500 &ndash; $1,200</td><td class="budget-note">Photography, copywriting, distribution</td></tr>
+            <tr><td class="budget-cat">Influencer &amp; Media Soft Opening</td><td class="budget-amt">$2,000 &ndash; $4,000</td><td class="budget-note">Food costs for 72 covers + hospitality</td></tr>
+            <tr><td class="budget-cat">Grand Opening Event</td><td class="budget-amt">$8,000 &ndash; $15,000</td><td class="budget-note">Event production, entertainment, A/V, photography</td></tr>
+            <tr><td class="budget-cat">Community Events (First 30 Days)</td><td class="budget-amt">$1,500 &ndash; $3,000</td><td class="budget-note">Garden workshops, Heritage Dinner, Ingredient Tasting</td></tr>
+            <tr><td class="budget-cat">Email Marketing Platform</td><td class="budget-amt">$100 &ndash; $300/mo</td><td class="budget-note">Klaviyo or Mailchimp; includes automation</td></tr>
+            <tr><td class="budget-cat">Paid Digital Advertising</td><td class="budget-amt">$1,500 &ndash; $3,000</td><td class="budget-note">Targeted Instagram/Facebook ads (Atlanta, Buckhead, Midtown)</td></tr>
+            <tr><td class="budget-cat">PR / Publicist <span style="opacity:0.55;">(optional)</span></td><td class="budget-amt">$2,500 &ndash; $5,000/mo</td><td class="budget-note">Recommended for first 3 months if budget allows</td></tr>
+            <tr class="budget-total"><td>TOTAL (Launch Window)</td><td class="budget-amt">$21,600 &ndash; $42,500</td><td class="budget-note">Pre-opening through Day 30</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="budget-footnote">Note: Costs can be significantly reduced if the founder team handles content production in-house (photography, video, copywriting). ìkórè ilẹ̀&rsquo;s existing brand assets &mdash; the botanical crest, four-color system, and website &mdash; reduce first-year design costs materially.</p>
+    </section>
+
+    <!-- 2.7 -->
+    <section class="doc-section" id="s27">
+      <p class="section-num">2.7</p>
+      <h2 class="section-h1">Competitive Differentiation Summary</h2>
+      <p class="body-text">Buckhead&rsquo;s fine dining landscape is home to well-capitalized, nationally recognized concepts &mdash; Chops Lobster Bar, Bones, Aria, Umi &mdash; built on steak, seafood, and traditional European fine dining formats. None of them offer what ìkórè ilẹ̀ offers.</p>
+      <p class="body-text">The competitive moat for ìkórè ilẹ̀ is not price, not location, and not celebrity chef attachment. It is narrative depth. Every element of this marketing strategy &mdash; from the Yoruba name to the garden program to the Heritage Dinner series &mdash; is designed to make ìkórè ilẹ̀ the restaurant that Atlanta&rsquo;s food community talks about, returns to, and defends as essential.</p>
+
+      <div class="closing-statement">
+        <p>Most Buckhead restaurants market their food. ìkórè ilẹ̀ markets its world. That distinction is what makes this concept not just a strong restaurant opening &mdash; but a durable institution in the making.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <p class="footer-note">ìkórè ilẹ̀ &middot; Buckhead, Atlanta &middot; Section 2: Marketing Strategy &nbsp;·&nbsp; <a href="index.html">Return to main site</a></p>
+</footer>
+
+</body>
+</html>
