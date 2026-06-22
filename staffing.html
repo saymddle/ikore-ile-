@@ -39,42 +39,7 @@
 
   a { color: inherit; }
 
-  /* ── NAV ── */
-  nav {
-    position: sticky;
-    top: 0; left: 0; right: 0;
-    z-index: 500;
-    background: var(--paper);
-    border-bottom: 1px solid rgba(26,20,16,0.1);
-    padding: 0 56px;
-  }
-  .nav-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 64px;
-  }
-  .nav-wordmark {
-    font-size: 16px;
-    font-style: italic;
-    font-weight: 300;
-    letter-spacing: 0.08em;
-    color: var(--ink);
-    text-decoration: none;
-  }
-  .nav-back {
-    font-size: 10px;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: rgba(26,20,16,0.55);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: color 0.2s;
-  }
-  .nav-back:hover { color: var(--deep-red); }
-  .nav-back span { font-size: 14px; }
+  /* nav styles provided by injected CSS */
 
   /* ── DOC HEADER ── */
   .doc-header {
@@ -390,19 +355,148 @@
     .doc-header, .overview, .section, .summary-inner, .analysis { padding-left: 28px; padding-right: 28px; }
     nav { padding: 0 24px; }
   }
+
+  /* ── Shared site CSS ── */
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap');
+
+  :root {
+    --off-white: #FFF9EB;
+    --black: #000000;
+    --deep-red: #641717;
+    --forest-green: #316D42;
+    --ink: #1A1410;
+    --paper: #FFF9EB;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.6;
+  }
+
+  
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 500;
+    background: var(--paper);
+    border-bottom: 1px solid rgba(26,20,16,0.1);
+    padding: 0 56px;
+    transition: box-shadow 0.3s;
+  }
+  .nav-wordmark {
+    display: block;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: rgba(26,20,16,0.5);
+    padding: 8px 0 2px;
+    text-decoration: none;
+  }
+  .nav-wordmark strong {
+    display: block;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: none;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .nav-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding: 5px 0 9px;
+    list-style: none;
+  }
+  .nav-links li a {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(26,20,16,0.55);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links li a:hover { color: var(--ink); }
+  .nav-links .reserve-link a {
+    color: var(--paper);
+    background: var(--deep-red);
+    padding: 6px 18px;
+    opacity: 1;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+  }
+  .nav-links .reserve-link a:hover { background: #7a1c1c; }
+
+  
+  /* ── FOOTER ── */
+  footer { background: var(--ink); padding: 80px 80px 36px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px; margin-bottom: 60px; }
+  .footer-brand-word { font-size: 26px; font-weight: 300; font-style: italic; color: var(--paper); margin-bottom: 14px; }
+  .footer-tagline { font-size: 12px; color: rgba(255,249,235,0.35); line-height: 1.75; max-width: 250px; }
+  .footer-col-title { font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase; color: rgba(255,249,235,0.28); margin-bottom: 18px; }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-links li a { font-size: 13px; font-style: italic; color: rgba(255,249,235,0.52); text-decoration: none; transition: color 0.2s; }
+  .footer-links li a:hover { color: var(--paper); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; border-top: 1px solid rgba(255,249,235,0.07); font-size: 10px; color: rgba(255,249,235,0.25); letter-spacing: 0.12em; }
+
+  
+  /* ── SCROLL REVEALS ── */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.85s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.85s cubic-bezier(0.25,0.46,0.45,0.94); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.12s; }
+  .reveal-delay-2 { transition-delay: 0.24s; }
+  .reveal-delay-3 { transition-delay: 0.36s; }
+  .reveal-left { opacity: 0; transform: translateX(-20px); transition: opacity 0.9s ease, transform 0.9s ease; }
+  .reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+  
+
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-row">
-    <a href="index.html" class="nav-wordmark">ìkórè ilẹ̀</a>
-    <a href="index.html" class="nav-back"><span>&larr;</span> Back to Site</a>
-  </div>
+<nav id="main-nav">
+  <a href="index.html" class="nav-wordmark">
+    <strong>ìkórè ilẹ̀</strong>
+    West African · Mediterranean · Farm-to-Table
+  </a>
+  <ul class="nav-links">
+    <li><a href="story.html">Our Story</a></li>
+    <li><a href="cuisine.html">Cuisine</a></li>
+    <li><a href="menu.html">Menu</a></li>
+    <li><a href="club.html">Club</a></li>
+    <li><a href="philosophy.html">Philosophy</a></li>
+    <li><a href="vision.html">Vision</a></li>
+    <li class="reserve-link"><a href="reservation.html">Reserve a Table</a></li>
+  </ul>
 </nav>
 
-<header class="doc-header">
-  <p class="doc-eyebrow">Internal Planning Document</p>
+<header class="doc-header" style="margin-top: 82px;">
+  <p class="doc-eyebrow">Planning Document</p>
   <h1 class="doc-title">Staffing &amp; Labor Cost Schedule</h1>
   <p class="doc-byline"><strong>Chef Dayan Jones</strong> &middot; Chef Grickis &middot; Menu &amp; Facilities Planning</p>
 </header>
@@ -677,8 +771,38 @@
 </section>
 
 <footer>
-  <p class="footer-note">ìkórè ilẹ̀ &middot; Internal Document &middot; <a href="index.html">Return to main site</a></p>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-word">ìkórè ilẹ̀</div>
+      <p class="footer-tagline">West African · Mediterranean · Farm-to-Table fine dining. Buckhead, Atlanta.<br><br>Seasonal ingredients. Timeless memories.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links"><li><a href="story.html">Our Story</a></li><li><a href="cuisine.html">Cuisine</a></li><li><a href="menu.html">Menu</a></li><li><a href="philosophy.html">Philosophy</a></li><li><a href="vision.html">Vision</a></li></ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Visit</div>
+      <ul class="footer-links"><li><a href="#">Buckhead Village, ATL</a></li><li><a href="#">Tue–Sat · 5:30 pm</a></li><li><a href="tel:+14045550187">(404) 555-0187</a></li><li><a href="mailto:reservations@ikoreile.com">Reservations</a></li><li><a href="#">Private Dining</a></li></ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Community</div>
+      <ul class="footer-links"><li><a href="#">Farm Partnership</a></li><li><a href="#">Scholarship Program</a></li><li><a href="#">Culinary Education</a></li><li><a href="#">Press &amp; Media</a></li><li><a href="#">Careers</a></li></ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 ìkórè ilẹ̀. All rights reserved.</span>
+    <span><a href="staffing.html" style="color:inherit; text-decoration:none; border-bottom:1px solid rgba(255,249,235,0.25);">Staffing &amp; Labor Plan</a> &nbsp;·&nbsp; <a href="strategy.html" style="color:inherit; text-decoration:none; border-bottom:1px solid rgba(255,249,235,0.25);">Marketing Strategy</a> &nbsp;·&nbsp; Harvest of the Earth &nbsp;·&nbsp; Buckhead · Atlanta</span>
+  </div>
 </footer>
 
+<script>
+  const reveals = document.querySelectorAll('.reveal, .reveal-left');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
+  reveals.forEach(el => obs.observe(el));
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => { nav.style.boxShadow = window.scrollY > 20 ? '0 2px 24px rgba(26,20,16,0.1)' : 'none'; }, { passive: true });
+</script>
 </body>
 </html>
